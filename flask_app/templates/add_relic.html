@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>Success</title>
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-10">
+                <h3>Report a relic, {{this_user.fname}}!</h3>
+            </div>
+            <div class="col">
+                <!-- <a href="/dashboard" class="btn btn-danger">All relics</a> -->
+                <p class="text-end"><a href="/dashboard">All relics</a></p>
+            </div>
+            <div class="col">
+                <!-- <a href="/logout" class="btn btn-danger">Logout</a> -->
+                <p class="text-end"><a href="/logout">Logout</a></p>
+            </div>
+        </div>
+
+        <form action="/relics/add_relic" method="POST">
+            {% with messages = get_flashed_messages(category_filter=['relic']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div>
+                <label name="name">Name:</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label name="discovery_date">Discovery Date:</label>
+                <input type="date" name="discovery_date">
+            </div>
+            <div>
+                <label name="description">Description:</label>
+                <textarea name="description"></textarea>
+            </div>
+            <button class="btn btn-primary">Add Relic</button>
+        </form>
+    </div>
+    
+</body>
+</html>
