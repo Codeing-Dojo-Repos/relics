@@ -36,6 +36,7 @@ def handleRegistration():
     }
     user_id = User.insert(data)
     session['user_id'] = user_id
+    session["fname"] = request.form["fname"]
     return redirect('/dashboard')
 
 @app.route('/dashboard', methods=['GET'])
@@ -69,6 +70,8 @@ def handleLogin():
         return redirect('/')
     # if they match, save user in session
     session['user_id'] = user_info[0]['id']
+    session["fname"] = user_info[0]['fname']
+    session["lname"] = user_info[0]['lname']
     #else print an error 
     return redirect('/dashboard')
 
@@ -81,4 +84,14 @@ def logout():
 def user_relics():
     if "user_id" not in session:
         return redirect("/")
-    return render_template("my_relics.html")
+
+    data = {
+        "id": session['user_id'] 
+    }
+    result = User.get_relics_by_user(data)
+    if len(result) == 0:
+        return []
+
+    print(f"relics: {result[0]}")
+    name = session["fname"]
+    return render_template("my_relics.html", relics=result, name=name)

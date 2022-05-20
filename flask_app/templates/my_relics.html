@@ -9,6 +9,33 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="container">
+
+        <div class="row">
+            <div class="col-10">
+                <h3>Relics discovered by {{name}}</h3>
+            </div>
+            <div class="col">
+                <!-- <a href="/dashboard" class="btn btn-danger">All relics</a> -->
+                <p class="text-end"><a href="/dashboard">All relics</a></p>
+            </div>
+            <div class="col">
+                <!-- <a href="/logout" class="btn btn-danger">Logout</a> -->
+                <p class="text-end"><a href="/logout">Logout</a></p>
+            </div>
+        </div>
+
+        {% for r in relics%}
+            <ul>
+                <li>
+                    {{r["name"]}} - {{r["discovery_date"]}}: 
+                    <a href="relics/{{r.id}}">View</a>
+                    <a href="relics/{{r.id}}/edit">Edit</a>
+                    <a href="relics/{{r.id}}/delete">Delete</a>
+                </li>
+            </ul>
+        {% endfor %}
+
+    </div>
 </body>
 </html>

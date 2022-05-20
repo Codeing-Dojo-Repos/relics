@@ -89,3 +89,10 @@ class User:
                     where id = %(id)s;"""
         result = connectToMySQL(cls.db).query_db(query, data)
         return result[0]
+    
+    @classmethod
+    def get_relics_by_user(cls, data):
+        query = """select * from relics
+                    where user_id = %(id)s;"""
+        result = connectToMySQL(cls.db).query_db(query, data)
+        return result
