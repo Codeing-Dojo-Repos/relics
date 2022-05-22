@@ -15,38 +15,45 @@
                 <h3>Report a relic, {{this_user.fname}}!</h3>
             </div>
             <div class="col">
-                <!-- <a href="/dashboard" class="btn btn-danger">All relics</a> -->
                 <p class="text-end"><a href="/dashboard">All relics</a></p>
             </div>
             <div class="col">
-                <!-- <a href="/logout" class="btn btn-danger">Logout</a> -->
                 <p class="text-end"><a href="/logout">Logout</a></p>
             </div>
         </div>
 
-        <form action="/relics/add_relic" method="POST">
-            {% with messages = get_flashed_messages(category_filter=['relic']) %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <div>
-                <label name="name">Name:</label>
-                <input type="text" name="name">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex ">
+                    {% with messages = get_flashed_messages(category_filter=['relic']) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form class="col-4" action="/relics/add_relic" method="POST">
+                        <div class="mb-3">
+                            <label name="name" class="form-label">Name:</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label name="discovery_date" class="form-label">Discovery Date:</label>
+                            <input type="date" name="discovery_date" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label name="description" class="form-label">Description:</label>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                        <button class="btn btn-primary">Add Relic</button>
+                    </form>
+                </div>
+                </div>
             </div>
-            <div>
-                <label name="discovery_date">Discovery Date:</label>
-                <input type="date" name="discovery_date">
-            </div>
-            <div>
-                <label name="description">Description:</label>
-                <textarea name="description"></textarea>
-            </div>
-            <button class="btn btn-primary">Add Relic</button>
-        </form>
+        </div>
     </div>
+
+    
     
 </body>
 </html>

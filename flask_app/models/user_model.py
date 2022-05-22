@@ -61,9 +61,22 @@ class User:
         return is_valid
 
     @staticmethod
-    def validate(data):
+    def validate_registration_form(data):
         is_valid = True
-        if not User.validata_fname(data['fname']):
+        if len(data['fname']) < 3:
+            flash("First name gotta be > 2", "reg")
+            is_valid = False
+        if len(data['lname']) < 3:
+            flash("Last name gotta be > 2", "reg")
+            is_valid = False
+        if not emailRegex.match(data['email']):
+            flash('Invalid email address', "reg")
+            is_valid = False
+        if len(data['password']) < 8:
+            flash("password gotta be > 7", "reg")
+            is_valid = False
+        if data['password'] != data['cpassword']:
+            flash("password have to match", "reg")
             is_valid = False
         return is_valid
 

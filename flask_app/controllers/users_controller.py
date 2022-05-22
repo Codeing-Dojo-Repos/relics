@@ -13,15 +13,7 @@ def home():
 @app.route('/handleRegistration', methods=['POST'])
 def handleRegistration():
     is_valid=True
-    if not User.validata_fname(request.form['fname']):
-        is_valid = False
-    if not User.validata_lname(request.form['lname']):
-        is_valid = False
-    if not User.validata_email(request.form['email']):
-        is_valid = False
-    if not User.validata_password(request.form['password'], request.form['cpassword']):
-        is_valid = False
-    if not request.form['password'] == request.form['cpassword']:
+    if not User.validate_registration_form(request.form):
         is_valid = False
     if is_valid == False:
         return redirect('/')
